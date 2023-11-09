@@ -1,0 +1,42 @@
+server:
+  servlet:
+    context-path: /file-management-services
+  port: 9112
+
+spring:
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/egov_filemgmnt
+    username: postgres
+    password: ikm
+  liquibase:
+    enabled: 'true'
+    drop-first: 'true'
+    change-log: classpath:/changelog/changelog-master.xml
+  jpa:
+    hibernate:
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+      ddl-auto: create
+#    properties:
+#      org:
+#        hibernate:
+#          envers:
+#            do_not_audit_optimistic_locking_field: false
+
+services:
+  mdms:
+    #    url: http://localhost:8080/egov-mdms-service
+    url: https://dev.api.ksmart.live/egov-mdms-service
+    search-endpoint: "/egov-mdms-service/v1/_search"
+  inward:
+      url: http://localhost:9113/inward-management-services
+      search-endpoint: "/egov-mdms-service/v1/_search"
+  hrms:
+      url: http://localhost:8080/
+aws:
+        service-bucket: ksm-kfm-file-services-dev
+        service-role: ksm-kfm-file-services-role-dev
+        region: ap-south-1
+
+
+domain.url: https://dev.ksmart.live
